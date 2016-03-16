@@ -1,0 +1,23 @@
+{
+  "name": "angular2-quickstart",
+  "description": "",
+  "main": "",
+  "authors": [
+    "rtrompier <remy.trompier@gmail.com>"
+  ],
+  "license": "ISC",
+  "moduleType": [],
+  "homepage": "",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "gold-phone-input": "PolymerElements/gold-phone-input#^1.0.9",
+    "google-map": "GoogleWebComponents/google-map#^1.1.10"
+  }
+}
