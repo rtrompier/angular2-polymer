@@ -11,20 +11,19 @@ import {Hero} from '../../model/hero';
     directives: [HeroDetailComponent],
 })
 
-export class HeroesComponent implements OnInit {
+export class HeroesComponent {
     heroes: Hero[];
     selectedHero: Hero;
 
     constructor(
         private _router: Router,
-        private _heroService: HeroService) { }
+        private _heroService: HeroService) {
 
-    getHeroes() {
-        this._heroService.getHeroes().then(heroes => this.heroes = heroes);
+        this._heroService.getHeroes().then(data =>  this.heroes = data);
     }
 
-    ngOnInit() {
-        this.getHeroes();
+    getHeroes() {
+        return this.heroes;
     }
 
     onSelect(hero: Hero) { this.selectedHero = hero; }

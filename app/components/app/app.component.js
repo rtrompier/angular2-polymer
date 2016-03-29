@@ -1,4 +1,4 @@
-System.register(['angular2/core', 'angular2/router', 'angular2/http', '../../services/hero.service', '../../services/user.service', '../dashboard/dashboard.component', '../heroes/heroes.component', '../hero-detail/hero-detail.component', '../users/users.component', '../map/map.component'], function(exports_1, context_1) {
+System.register(['angular2/core', 'angular2/router', 'angular2/http', 'angular2/platform/browser', '../../services/hero.service', '../../services/user.service', '../dashboard/dashboard.component', '../heroes/heroes.component', '../hero-detail/hero-detail.component', '../users/users.component', '../map/map.component'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,7 +10,7 @@ System.register(['angular2/core', 'angular2/router', 'angular2/http', '../../ser
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, router_1, http_1, hero_service_1, user_service_1, dashboard_component_1, heroes_component_1, hero_detail_component_1, users_component_1, map_component_1;
+    var core_1, router_1, http_1, browser_1, hero_service_1, user_service_1, dashboard_component_1, heroes_component_1, hero_detail_component_1, users_component_1, map_component_1;
     var AppComponent;
     return {
         setters:[
@@ -22,6 +22,9 @@ System.register(['angular2/core', 'angular2/router', 'angular2/http', '../../ser
             },
             function (http_1_1) {
                 http_1 = http_1_1;
+            },
+            function (browser_1_1) {
+                browser_1 = browser_1_1;
             },
             function (hero_service_1_1) {
                 hero_service_1 = hero_service_1_1;
@@ -46,8 +49,9 @@ System.register(['angular2/core', 'angular2/router', 'angular2/http', '../../ser
             }],
         execute: function() {
             AppComponent = (function () {
-                function AppComponent() {
+                function AppComponent(titleProvider) {
                     this.title = 'Tour of Heroes';
+                    titleProvider.setTitle(this.title);
                 }
                 AppComponent = __decorate([
                     core_1.Component({
@@ -60,7 +64,8 @@ System.register(['angular2/core', 'angular2/router', 'angular2/http', '../../ser
                             http_1.HTTP_PROVIDERS,
                             hero_service_1.HeroService,
                             user_service_1.UserService
-                        ]
+                        ],
+                        viewProviders: [browser_1.Title]
                     }),
                     router_1.RouteConfig([
                         {
@@ -90,7 +95,7 @@ System.register(['angular2/core', 'angular2/router', 'angular2/http', '../../ser
                             component: map_component_1.MapComponent
                         }
                     ]), 
-                    __metadata('design:paramtypes', [])
+                    __metadata('design:paramtypes', [browser_1.Title])
                 ], AppComponent);
                 return AppComponent;
             }());

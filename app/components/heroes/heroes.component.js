@@ -29,15 +29,13 @@ System.register(['angular2/core', 'angular2/router', '../hero-detail/hero-detail
         execute: function() {
             HeroesComponent = (function () {
                 function HeroesComponent(_router, _heroService) {
+                    var _this = this;
                     this._router = _router;
                     this._heroService = _heroService;
+                    this._heroService.getHeroes().then(function (data) { return _this.heroes = data; });
                 }
                 HeroesComponent.prototype.getHeroes = function () {
-                    var _this = this;
-                    this._heroService.getHeroes().then(function (heroes) { return _this.heroes = heroes; });
-                };
-                HeroesComponent.prototype.ngOnInit = function () {
-                    this.getHeroes();
+                    return this.heroes;
                 };
                 HeroesComponent.prototype.onSelect = function (hero) { this.selectedHero = hero; };
                 HeroesComponent.prototype.gotoDetail = function () {

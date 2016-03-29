@@ -1,6 +1,7 @@
 import { Component }       from 'angular2/core';
 import { RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS } from 'angular2/router';
 import { Http, Headers, HTTP_PROVIDERS } from 'angular2/http';
+import {Title} from 'angular2/platform/browser';
 
 import { HeroService }     from '../../services/hero.service';
 import { UserService }     from '../../services/user.service';
@@ -30,7 +31,8 @@ import { MapComponent } from '../map/map.component';
         HTTP_PROVIDERS,
         HeroService,
         UserService
-    ]
+    ],
+    viewProviders: [Title]
 })
 
 @RouteConfig([
@@ -64,4 +66,9 @@ import { MapComponent } from '../map/map.component';
 
 export class AppComponent {
     title = 'Tour of Heroes';
+    constructor(titleProvider: Title) {
+        titleProvider.setTitle(this.title);
+    }
+
+
 }
