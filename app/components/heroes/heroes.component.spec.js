@@ -1,7 +1,7 @@
-System.register(['angular2/core', 'angular2/testing', './heroes.component', "../../services/hero.service", "angular2/router"], function(exports_1, context_1) {
+System.register(['angular2/core', 'angular2/testing', './heroes.component', "../../services/hero.service", "angular2/router", "../../mock/mock-heroes"], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
-    var core_1, testing_1, heroes_component_1, hero_service_1, router_1;
+    var core_1, testing_1, heroes_component_1, hero_service_1, router_1, mock_heroes_1;
     var FakeRouter, FakeHeroService, FakeRouterParams;
     return {
         setters:[
@@ -19,6 +19,9 @@ System.register(['angular2/core', 'angular2/testing', './heroes.component', "../
             },
             function (router_1_1) {
                 router_1 = router_1_1;
+            },
+            function (mock_heroes_1_1) {
+                mock_heroes_1 = mock_heroes_1_1;
             }],
         execute: function() {
             FakeRouter = (function () {
@@ -61,6 +64,11 @@ System.register(['angular2/core', 'angular2/testing', './heroes.component', "../
                 });
                 testing_1.it('should have correct data', function () {
                     testing_1.expect(component.getHeroes()).toEqual(['toto', 'tata']);
+                });
+                testing_1.it('should select a hero', function () {
+                    component.onSelect(mock_heroes_1.HEROES[0]);
+                    testing_1.expect(component.selectedHero).not.toBeNull();
+                    testing_1.expect(component.selectedHero.name).toEqual(mock_heroes_1.HEROES[0].name);
                 });
             });
         }

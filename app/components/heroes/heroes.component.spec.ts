@@ -18,6 +18,7 @@ import {HeroService} from "../../services/hero.service";
 import {Router, RouteParams} from "angular2/router";
 import {Observable} from 'rxjs/Observable';
 import {HeroesComponent} from "./heroes.component";
+import {HEROES} from "../../mock/mock-heroes";
 
 class FakeRouter {
     navigate() {}
@@ -58,5 +59,12 @@ describe('Heroes Component test suite', () => {
 
     it('should have correct data', () => {
         expect(component.getHeroes()).toEqual(['toto', 'tata']);
-    })
-})
+    });
+
+    it('should select a hero', () => {
+        component.onSelect(HEROES[0]);
+        expect(component.selectedHero).not.toBeNull();
+        expect(component.selectedHero.name).toEqual(HEROES[0].name);
+    });
+
+});
