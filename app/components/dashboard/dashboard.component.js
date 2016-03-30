@@ -32,7 +32,7 @@ System.register(['angular2/core', 'angular2/router', '../../services/hero.servic
                 }
                 DashboardComponent.prototype.ngOnInit = function () {
                     var _this = this;
-                    this._heroService.getHeroes()
+                    return this._heroService.getHeroes()
                         .then(function (heroes) { return _this.heroes = heroes; });
                 };
                 DashboardComponent.prototype.gotoDetail = function (hero) {
@@ -45,10 +45,9 @@ System.register(['angular2/core', 'angular2/router', '../../services/hero.servic
                         styleUrls: ['app/components/dashboard/dashboard.component.css'],
                         templateUrl: 'app/components/dashboard/dashboard.component.html',
                     }), 
-                    __metadata('design:paramtypes', [(typeof (_a = typeof router_1.Router !== 'undefined' && router_1.Router) === 'function' && _a) || Object, hero_service_1.HeroService])
+                    __metadata('design:paramtypes', [router_1.Router, hero_service_1.HeroService])
                 ], DashboardComponent);
                 return DashboardComponent;
-                var _a;
             }());
             exports_1("DashboardComponent", DashboardComponent);
         }

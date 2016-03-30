@@ -8,7 +8,8 @@
     "lite": "lite-server",
     "typings": "typings",
     "postinstall": "typings install",
-    "test": "live-server --open=unit-tests.html"
+    "test": "live-server --open=unit-tests.html",
+    "e2e-tests": "protractor e2e-tests/conf.js"
   },
   "license": "ISC",
   "dependencies": {

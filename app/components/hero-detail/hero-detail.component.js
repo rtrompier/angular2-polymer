@@ -44,10 +44,9 @@ System.register(['angular2/core', 'angular2/router', '../../services/hero.servic
                         templateUrl: 'app/components/hero-detail/hero-detail.component.html',
                         inputs: ['hero']
                     }), 
-                    __metadata('design:paramtypes', [hero_service_1.HeroService, (typeof (_a = typeof router_1.RouteParams !== 'undefined' && router_1.RouteParams) === 'function' && _a) || Object])
+                    __metadata('design:paramtypes', [hero_service_1.HeroService, router_1.RouteParams])
                 ], HeroDetailComponent);
                 return HeroDetailComponent;
-                var _a;
             }());
             exports_1("HeroDetailComponent", HeroDetailComponent);
         }

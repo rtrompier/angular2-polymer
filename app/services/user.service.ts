@@ -1,12 +1,11 @@
 import {Injectable} from 'angular2/core';
 import { Http, Headers, Response, HTTP_PROVIDERS } from 'angular2/http';
 import '../../node_modules/rxjs/add/operator/map';
-import {User} from '../model/user';
 
 @Injectable()
 export class UserService {
 
-    constructor(private http:Http){}
+    constructor(public http:Http){}
 
     getUsers(){
         var _self = this;
@@ -29,6 +28,10 @@ export class UserService {
                 resolve(users);
             });
         });
+    }
+    
+    getData() {
+        
     }
 
 }

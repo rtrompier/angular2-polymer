@@ -13,14 +13,14 @@ describe('HeroService test suite', () => {
         })
     });
 
-    it('should return heroes when getHeroesSlowly() is called', (done) => {
+    /*it('should return heroes when getHeroesSlowly() is called', (done) => {
         let service: HeroService = new HeroService();
 
         service.getHeroesSlowly().then(data => {
             expect(data.length).toBe(HEROES.length);
             done();
         })
-    });
+    });*/
 
     it('should return a hero when getHero() is called', (done) => {
         let service: HeroService = new HeroService();

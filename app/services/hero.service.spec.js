@@ -22,13 +22,14 @@ System.register(['angular2/testing', "./hero.service", "../mock/mock-heroes"], f
                         done();
                     });
                 });
-                testing_1.it('should return heroes when getHeroesSlowly() is called', function (done) {
-                    var service = new hero_service_1.HeroService();
-                    service.getHeroesSlowly().then(function (data) {
-                        testing_1.expect(data.length).toBe(mock_heroes_1.HEROES.length);
+                /*it('should return heroes when getHeroesSlowly() is called', (done) => {
+                    let service: HeroService = new HeroService();
+            
+                    service.getHeroesSlowly().then(data => {
+                        expect(data.length).toBe(HEROES.length);
                         done();
-                    });
-                });
+                    })
+                });*/
                 testing_1.it('should return a hero when getHero() is called', function (done) {
                     var service = new hero_service_1.HeroService();
                     service.getHero(11).then(function (data) {

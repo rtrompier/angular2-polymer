@@ -11,32 +11,33 @@ import {
     ComponentFixture
 } from 'angular2/testing';
 import {Router, RouteParams} from "angular2/router";
-
-import {HeroDetailComponent} from './hero-detail.component';
 import {HeroService} from "../../services/hero.service";
 import {HEROES} from "../../mock/mock-heroes";
+import {DashboardComponent} from "./dashboard.component";
 
 class FakeRouter {
     navigate() {}
 }
 
 class FakeHeroService {
-    getHero(id) {
+    getHeroes() {
         return new Promise(resolve => {
-            resolve(HEROES[0]);
+           resolve([
+               {id:10, name:'toto', phone:'0123456789'},
+               {id:11, name:'tata', phone:'0123456789'},
+               {id:12, name:'titi', phone:'0123456789'}
+           ]);
         })
     }
 }
 
 class FakeRouterParams {
-    get(val) {
-        return 0;
-    }
+    get(val) {}
 }
 
-describe('Hero Detail Component test suite', () => {
+describe('Dashboard Component test suite', () => {
     let fixture: ComponentFixture;
-    let component: HeroDetailComponent;
+    let component: DashboardComponent;
 
     beforeEachProviders(() => [
         provide(Router, {useClass: FakeRouter}),
@@ -45,7 +46,7 @@ describe('Hero Detail Component test suite', () => {
     ]);
 
     beforeEach(injectAsync([TestComponentBuilder], tcb =>
-        tcb.createAsync(HeroDetailComponent)
+        tcb.createAsync(DashboardComponent)
             .then(f => fixture = f)
     ));
 
@@ -55,8 +56,13 @@ describe('Hero Detail Component test suite', () => {
     });
 
 
-    it('should return correct hero 0', () => {
-        expect(component.hero).toEqual(HEROES[0]);
+    it('should have 3 heroes', () => {
+        expect(component.heroes.length).toBe(3);
+    });
+
+    it('should select a hero', () => {
+        component.gotoDetail(HEROES[0]);
+        //Expected what ? Test E2E ?
     });
 
 });
