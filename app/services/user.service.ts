@@ -24,7 +24,6 @@ export class UserService {
             .map((res: Response) => res.json())
             .subscribe(function (resp) {
                 var users = Object.keys(resp).map(id => resp[id]);
-                console.log(users);
                 resolve(users);
             });
         });

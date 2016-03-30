@@ -40,7 +40,6 @@ System.register(['angular2/core', 'angular2/http', '../../node_modules/rxjs/add/
                             .map(function (res) { return res.json(); })
                             .subscribe(function (resp) {
                             var users = Object.keys(resp).map(function (id) { return resp[id]; });
-                            console.log(users);
                             resolve(users);
                         });
                     });

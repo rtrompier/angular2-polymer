@@ -1,37 +1,30 @@
-import {describe, it, expect, beforeEachProviders, inject} from 'angular2/testing';
+import {describe, it, expect, beforeEachProviders, injectAsync} from 'angular2/testing';
 import {UserService} from "./user.service";
-import {provide, Injector} from "angular2/core";
+import {provide} from "angular2/core";
+import {HTTP_PROVIDERS, XHRBackend, Response, ResponseOptions} from 'angular2/http';
 import {MockBackend} from 'angular2/http/testing';
-
-import {Http, Response, BaseRequestOptions, ResponseOptions, HTTP_PROVIDERS} from 'angular2/http';
 
 
 describe('UserService', () => {
     beforeEachProviders(() => {
-        [
-            MockBackend,
-            BaseRequestOptions,
-            provide(
-                Http,
-                {
-                    useFactory: (backend, defaultOptions) => {
-                        return new Http(backend, defaultOptions);
-                    },
-                    deps: [MockBackend, BaseRequestOptions]
-                }),
+        return [
+            HTTP_PROVIDERS,
+            provide(XHRBackend, {useClass: MockBackend}),
             UserService
-        ]
+        ];
     });
 
     it('should respect your expectation',
-        inject(
-            [UserService, MockBackend], (userService, mockBackend) => {
-                let response = 'Expected Response from HTTP service usually JSON format';
-                let responseOptions = new ResponseOptions({body: response});
-                mockBackend.connections.subscribe(
-                    c => c.mockRespond(new Response(responseOptions)));
+        injectAsync([XHRBackend, UserService], (mockBackend, userService) => {
 
-                var res = userService.getUsers();
-                expect(res).toEqual('your own expectation');
-            }));
+            let response = [{id:0, name: 'toto'}];
+            let responseOptions = new ResponseOptions({body: response});
+            mockBackend.connections.subscribe(
+                c => c.mockRespond(new Response(responseOptions))
+            );
+
+            return userService.getUsers().then(data => {
+                expect(data.length).toBe(1);
+            });
+        }));
 });
