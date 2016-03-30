@@ -13,7 +13,7 @@ import {
 import {Router, RouteParams} from "angular2/router";
 import {Observable} from 'rxjs/Observable';
 
-import {HeroesComponent} from './heroes.component';
+import {HeroDetailComponent} from './hero-detail.component';
 import {HeroService} from "../../services/hero.service";
 import {HEROES} from "../../mock/mock-heroes";
 
@@ -22,20 +22,22 @@ class FakeRouter {
 }
 
 class FakeHeroService {
-    getHeroes() {
+    getHero(id) {
         return new Promise(resolve => {
-           resolve(['toto', 'tata']);
+            resolve(HEROES[0]);
         })
     }
 }
 
 class FakeRouterParams {
-    get(val) {}
+    get(val) {
+        return 0;
+    }
 }
 
-describe('Heroes Component test suite', () => {
+describe('Hero Detail Component test suite', () => {
     let fixture: ComponentFixture;
-    let component: HeroesComponent;
+    let component: HeroDetailComponent;
 
     beforeEachProviders(() => [
         provide(Router, {useClass: FakeRouter}),
@@ -44,24 +46,18 @@ describe('Heroes Component test suite', () => {
     ]);
 
     beforeEach(injectAsync([TestComponentBuilder], tcb =>
-        tcb.createAsync(HeroesComponent)
+        tcb.createAsync(HeroDetailComponent)
             .then(f => fixture = f)
     ));
 
     beforeEach(done => {
         component = fixture.componentInstance;
-        done();
+        component.ngOnInit().then(() => done());
     });
 
 
-    it('should have correct data', () => {
-        expect(component.getHeroes()).toEqual(['toto', 'tata']);
-    });
-
-    it('should select a hero', () => {
-        component.onSelect(HEROES[0]);
-        expect(component.selectedHero).not.toBeNull();
-        expect(component.selectedHero.name).toEqual(HEROES[0].name);
+    it('should return correct hero 0', () => {
+        expect(component.hero).toEqual(HEROES[0]);
     });
 
 });

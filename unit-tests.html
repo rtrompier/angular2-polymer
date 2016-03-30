@@ -44,8 +44,10 @@
 
         // #3. Import the spec file explicitly
         Promise.all([
-            System.import('./app/components/app/app.component.spec'),
+            System.import('./app/main.spec'),
             System.import('./app/components/heroes/heroes.component.spec'),
+            System.import('./app/components/hero-detail/hero-detail.component.spec'),
+            System.import('./app/services/hero.service.spec'),
         ])
 
                 // #4. wait for all imports to load ...

@@ -1,7 +1,7 @@
-System.register(['angular2/core', 'angular2/testing', "angular2/router", './heroes.component', "../../services/hero.service", "../../mock/mock-heroes"], function(exports_1, context_1) {
+System.register(['angular2/core', 'angular2/testing', "angular2/router", './hero-detail.component', "../../services/hero.service", "../../mock/mock-heroes"], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
-    var core_1, testing_1, router_1, heroes_component_1, hero_service_1, mock_heroes_1;
+    var core_1, testing_1, router_1, hero_detail_component_1, hero_service_1, mock_heroes_1;
     var FakeRouter, FakeHeroService, FakeRouterParams;
     return {
         setters:[
@@ -14,8 +14,8 @@ System.register(['angular2/core', 'angular2/testing', "angular2/router", './hero
             function (router_1_1) {
                 router_1 = router_1_1;
             },
-            function (heroes_component_1_1) {
-                heroes_component_1 = heroes_component_1_1;
+            function (hero_detail_component_1_1) {
+                hero_detail_component_1 = hero_detail_component_1_1;
             },
             function (hero_service_1_1) {
                 hero_service_1 = hero_service_1_1;
@@ -33,9 +33,9 @@ System.register(['angular2/core', 'angular2/testing', "angular2/router", './hero
             FakeHeroService = (function () {
                 function FakeHeroService() {
                 }
-                FakeHeroService.prototype.getHeroes = function () {
+                FakeHeroService.prototype.getHero = function (id) {
                     return new Promise(function (resolve) {
-                        resolve(['toto', 'tata']);
+                        resolve(mock_heroes_1.HEROES[0]);
                     });
                 };
                 return FakeHeroService;
@@ -43,10 +43,12 @@ System.register(['angular2/core', 'angular2/testing', "angular2/router", './hero
             FakeRouterParams = (function () {
                 function FakeRouterParams() {
                 }
-                FakeRouterParams.prototype.get = function (val) { };
+                FakeRouterParams.prototype.get = function (val) {
+                    return 0;
+                };
                 return FakeRouterParams;
             }());
-            testing_1.describe('Heroes Component test suite', function () {
+            testing_1.describe('Hero Detail Component test suite', function () {
                 var fixture;
                 var component;
                 testing_1.beforeEachProviders(function () { return [
@@ -55,23 +57,18 @@ System.register(['angular2/core', 'angular2/testing', "angular2/router", './hero
                     core_1.provide(router_1.RouteParams, { useClass: FakeRouterParams })
                 ]; });
                 testing_1.beforeEach(testing_1.injectAsync([testing_1.TestComponentBuilder], function (tcb) {
-                    return tcb.createAsync(heroes_component_1.HeroesComponent)
+                    return tcb.createAsync(hero_detail_component_1.HeroDetailComponent)
                         .then(function (f) { return fixture = f; });
                 }));
                 testing_1.beforeEach(function (done) {
                     component = fixture.componentInstance;
-                    done();
+                    component.ngOnInit().then(function () { return done(); });
                 });
-                testing_1.it('should have correct data', function () {
-                    testing_1.expect(component.getHeroes()).toEqual(['toto', 'tata']);
-                });
-                testing_1.it('should select a hero', function () {
-                    component.onSelect(mock_heroes_1.HEROES[0]);
-                    testing_1.expect(component.selectedHero).not.toBeNull();
-                    testing_1.expect(component.selectedHero.name).toEqual(mock_heroes_1.HEROES[0].name);
+                testing_1.it('should return correct hero 0', function () {
+                    testing_1.expect(component.hero).toEqual(mock_heroes_1.HEROES[0]);
                 });
             });
         }
     }
 });
-//# sourceMappingURL=heroes.component.spec.js.map
+//# sourceMappingURL=hero-detail.component.spec.js.map
