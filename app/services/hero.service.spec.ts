@@ -3,7 +3,7 @@ import {HeroService} from "./hero.service";
 import {HEROES} from "../mock/mock-heroes";
 
 
-describe('HeroService', () => {
+describe('HeroService test suite', () => {
     it('should return heroes when getHeroes() is called', (done) => {
         let service: HeroService = new HeroService();
 

@@ -14,7 +14,7 @@ System.register(['angular2/testing', "./hero.service", "../mock/mock-heroes"], f
                 mock_heroes_1 = mock_heroes_1_1;
             }],
         execute: function() {
-            testing_1.describe('HeroService', function () {
+            testing_1.describe('HeroService test suite', function () {
                 testing_1.it('should return heroes when getHeroes() is called', function (done) {
                     var service = new hero_service_1.HeroService();
                     service.getHeroes().then(function (data) {

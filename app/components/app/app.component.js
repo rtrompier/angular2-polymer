@@ -95,9 +95,10 @@ System.register(['angular2/core', 'angular2/router', 'angular2/http', 'angular2/
                             component: map_component_1.MapComponent
                         }
                     ]), 
-                    __metadata('design:paramtypes', [browser_1.Title])
+                    __metadata('design:paramtypes', [(typeof (_a = typeof browser_1.Title !== 'undefined' && browser_1.Title) === 'function' && _a) || Object])
                 ], AppComponent);
                 return AppComponent;
+                var _a;
             }());
             exports_1("AppComponent", AppComponent);
         }
