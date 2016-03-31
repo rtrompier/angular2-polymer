@@ -50,7 +50,7 @@ describe('Heroes Component test suite', () => {
 
     beforeEach(done => {
         component = fixture.componentInstance;
-        done();
+        component.ngOnInit().then(() => done())
     });
 
 

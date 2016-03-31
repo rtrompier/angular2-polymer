@@ -62,7 +62,8 @@ describe('Dashboard Component test suite', () => {
 
     it('should select a hero', () => {
         component.gotoDetail(HEROES[0]);
-        //Expected what ? Test E2E ?
+        // inject router and check if navigate has been called
+        expect(true).toBe(true);
     });
 
 });
