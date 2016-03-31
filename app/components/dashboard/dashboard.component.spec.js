@@ -53,8 +53,9 @@ System.register(['angular2/core', 'angular2/testing', "angular2/router", "../../
             testing_1.describe('Dashboard Component test suite', function () {
                 var fixture;
                 var component;
+                var router = new FakeRouter();
                 testing_1.beforeEachProviders(function () { return [
-                    core_1.provide(router_1.Router, { useClass: FakeRouter }),
+                    core_1.provide(router_1.Router, { useValue: router }),
                     core_1.provide(hero_service_1.HeroService, { useClass: FakeHeroService }),
                     core_1.provide(router_1.RouteParams, { useClass: FakeRouterParams })
                 ]; });
@@ -69,9 +70,10 @@ System.register(['angular2/core', 'angular2/testing', "angular2/router", "../../
                 testing_1.it('should have 3 heroes', function () {
                     testing_1.expect(component.heroes.length).toBe(3);
                 });
-                testing_1.it('should select a hero', function () {
+                testing_1.it('should select a hero and navigate', function () {
+                    spyOn(router, 'navigate');
                     component.gotoDetail(mock_heroes_1.HEROES[0]);
-                    //Expected what ? Test E2E ?
+                    testing_1.expect(router.navigate).toHaveBeenCalled();
                 });
             });
         }

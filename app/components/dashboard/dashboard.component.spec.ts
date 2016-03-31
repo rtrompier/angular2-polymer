@@ -38,9 +38,10 @@ class FakeRouterParams {
 describe('Dashboard Component test suite', () => {
     let fixture: ComponentFixture;
     let component: DashboardComponent;
+    let router = new FakeRouter();
 
     beforeEachProviders(() => [
-        provide(Router, {useClass: FakeRouter}),
+        provide(Router, {useValue: router}),
         provide(HeroService, {useClass: FakeHeroService}),
         provide(RouteParams, {useClass: FakeRouterParams})
     ]);
@@ -59,11 +60,12 @@ describe('Dashboard Component test suite', () => {
     it('should have 3 heroes', () => {
         expect(component.heroes.length).toBe(3);
     });
-
-    it('should select a hero', () => {
+    
+    it('should select a hero and navigate', () => {
+        spyOn(router, 'navigate');
         component.gotoDetail(HEROES[0]);
-        // inject router and check if navigate has been called
-        expect(true).toBe(true);
+
+        expect(router.navigate).toHaveBeenCalled();
     });
 
 });

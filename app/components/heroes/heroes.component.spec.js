@@ -60,7 +60,7 @@ System.register(['angular2/core', 'angular2/testing', "angular2/router", './hero
                 }));
                 testing_1.beforeEach(function (done) {
                     component = fixture.componentInstance;
-                    done();
+                    component.ngOnInit().then(function () { return done(); });
                 });
                 testing_1.it('should have correct data', function () {
                     testing_1.expect(component.getHeroes()).toEqual(['toto', 'tata']);
