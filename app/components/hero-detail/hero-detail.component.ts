@@ -1,5 +1,6 @@
-import { Component, OnInit } from 'angular2/core';
+import {Component, OnInit, Input, OnChanges} from 'angular2/core';
 import {RouteParams} from 'angular2/router';
+import {FormBuilder, ControlGroup, Control} from 'angular2/common';
 
 import { HeroService } from '../../services/hero.service';
 import {Hero} from '../../model/hero';
@@ -10,20 +11,46 @@ import {Hero} from '../../model/hero';
     inputs: ['hero']
 })
 
-export class HeroDetailComponent {
+export class HeroDetailComponent implements OnInit, OnChanges {
     hero:Hero;
+    heroForm: ControlGroup;
 
     constructor(private _heroService:HeroService,
-                private _routeParams:RouteParams) {
+                private _routeParams:RouteParams,
+                private _fb: FormBuilder) {
+
     }
 
     ngOnInit() {
-        let id = +this._routeParams.get('id');
-        return this._heroService.getHero(id)
-            .then(hero => this.hero = hero);
+        let id = this._routeParams.get('id');
+        if (!!id) {
+            let heroId = +id;
+            return this._heroService.getHero(heroId)
+                .then(hero => {
+                    this.hero = hero;
+                    this.heroForm = this._fb.group({
+                        heroName: this._fb.control(hero.name)
+                    })
+                });
+        } else {
+            return Promise.reject('No hero');
+        }
+    }
+
+    ngOnChanges() {
+        if (this.hero) {
+            this.heroForm = this._fb.group({
+                heroName: this._fb.control(this.hero.name)
+            })
+        }
     }
 
     goBack() {
         window.history.back();
+    }
+
+    save() {
+        let updatedHero = Object.assign(this.hero, {name: this.heroForm.value.heroName});
+        this._heroService.saveHero(updatedHero);
     }
 }

@@ -44,7 +44,7 @@ System.register(['angular2/core', 'angular2/testing', "angular2/router", './hero
                 function FakeRouterParams() {
                 }
                 FakeRouterParams.prototype.get = function (val) {
-                    return 0;
+                    return '12';
                 };
                 return FakeRouterParams;
             }());
@@ -62,7 +62,7 @@ System.register(['angular2/core', 'angular2/testing', "angular2/router", './hero
                 }));
                 testing_1.beforeEach(function (done) {
                     component = fixture.componentInstance;
-                    component.ngOnInit().then(function () { return done(); });
+                    component.ngOnInit().then(function () { return done(); }, function () { return done(); });
                 });
                 testing_1.it('should return correct hero 0', function () {
                     testing_1.expect(component.hero).toEqual(mock_heroes_1.HEROES[0]);

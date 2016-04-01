@@ -30,7 +30,7 @@ class FakeHeroService {
 
 class FakeRouterParams {
     get(val) {
-        return 0;
+        return '12';
     }
 }
 
@@ -51,7 +51,7 @@ describe('Hero Detail Component test suite', () => {
 
     beforeEach(done => {
         component = fixture.componentInstance;
-        component.ngOnInit().then(() => done());
+        component.ngOnInit().then(() => done(), () => done());
     });
 
 

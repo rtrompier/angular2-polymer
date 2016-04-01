@@ -23,20 +23,26 @@ System.register(['angular2/core', '../mock/mock-heroes'], function(exports_1, co
         execute: function() {
             HeroService = (function () {
                 function HeroService() {
+                    this.allHeroes = mock_heroes_1.HEROES;
                 }
                 HeroService.prototype.getHeroes = function () {
-                    return Promise.resolve(mock_heroes_1.HEROES);
+                    return Promise.resolve(this.allHeroes);
                 };
                 // See the "Take it slow" appendix
                 HeroService.prototype.getHeroesSlowly = function () {
+                    var _this = this;
                     return new Promise(function (resolve) {
-                        return setTimeout(function () { return resolve(mock_heroes_1.HEROES); }, 2000);
+                        return setTimeout(function () { return resolve(_this.allHeroes); }, 2000);
                     } // 2 seconds
                      // 2 seconds
                     );
                 };
                 HeroService.prototype.getHero = function (id) {
-                    return Promise.resolve(mock_heroes_1.HEROES).then(function (heroes) { return heroes.filter(function (hero) { return hero.id === id; })[0]; });
+                    return Promise.resolve(this.allHeroes).then(function (heroes) { return heroes.filter(function (hero) { return hero.id === id; })[0]; });
+                };
+                HeroService.prototype.saveHero = function (hero) {
+                    var index = this.allHeroes.map(function (hero) { return hero.id; }).indexOf(hero.id);
+                    this.allHeroes[index] = hero;
                 };
                 HeroService = __decorate([
                     core_1.Injectable(), 
