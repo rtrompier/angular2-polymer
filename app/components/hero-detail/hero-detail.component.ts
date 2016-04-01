@@ -50,7 +50,11 @@ export class HeroDetailComponent implements OnInit, OnChanges {
     }
 
     save() {
-        let updatedHero = Object.assign(this.hero, {name: this.heroForm.value.heroName});
+        let updatedHero = Object.assign(this.hero,
+            {
+                name: this.heroForm.value.heroName,
+            }
+        );
         this._heroService.saveHero(updatedHero);
     }
 }

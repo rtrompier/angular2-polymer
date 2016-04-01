@@ -61,7 +61,9 @@ System.register(['angular2/core', 'angular2/router', 'angular2/common', '../../s
                     window.history.back();
                 };
                 HeroDetailComponent.prototype.save = function () {
-                    var updatedHero = Object.assign(this.hero, { name: this.heroForm.value.heroName });
+                    var updatedHero = Object.assign(this.hero, {
+                        name: this.heroForm.value.heroName,
+                    });
                     this._heroService.saveHero(updatedHero);
                 };
                 HeroDetailComponent = __decorate([

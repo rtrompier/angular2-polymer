@@ -11,8 +11,9 @@
 		<div>
 			<gold-phone-input
 					country-code="33"
-					value="{{hero.phone}}"
-					phone-number-pattern="X-XX-XX-XX-XX">
+					phone-number-pattern="X-XX-XX-XX-XX"
+					[(ngModel)]="hero.phone" ngDefaultControl
+			>
 			</gold-phone-input>
 		</div>
 		<pre>{{hero | json}}</pre>
